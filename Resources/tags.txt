@@ -1,0 +1,14 @@
+N N
+Np N
+Nc N
+Nu N
+V V
+A A
+P P
+L L
+M L
+E E
+R R
+Y N
+X1 X1
+X2 X2

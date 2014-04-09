@@ -1,0 +1,18 @@
+S
+S = NP VP
+S = NP AP
+AP = A
+AP = R A
+AP = A R E
+VP = V
+VP = VP NP
+VP = VP AP
+VP = VP PP
+NP = N
+NP = P
+NP = N P
+NP = NP AP
+NP = NP PP
+NP = L NP
+PP = E NP
+NP = N P X1 X2
