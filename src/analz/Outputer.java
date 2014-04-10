@@ -26,20 +26,8 @@ public class Outputer {
         bw.close();
     }
 
-    public static void write(String file, LinkedList<SyntaxNode> results, boolean append) throws Exception {
-        LinkedList<String> results = toString(trees);
+    public static void write(String file, LinkedList<SyntaxNode> trees, boolean append) throws Exception {
+        LinkedList<String> results = SyntaxNode.toString(trees);
         write(file, results, append);
     }
-
-    public static LinkedList<String> toString(LinkedList<SyntaxNode> trees) {
-        LinkedList<String> results = new LinkedList<String>();
-        for (SyntaxNode tree : trees)
-            results.add(toString(tree));
-        return results;
-    }
-
-    private static String toString(SyntaxNode tree) {
-        return null;
-    }
-
 }

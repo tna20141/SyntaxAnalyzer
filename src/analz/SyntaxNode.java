@@ -59,4 +59,29 @@ public class SyntaxNode {
     public boolean isRoot() {
         return (this.parent == null);
     }
+
+    public String toString() {
+        String result = "";
+
+        if (isLeaf()) {
+            result += " " + this.value;
+            return result;
+        }
+
+        result += "(" + this.value;
+        for (SyntaxNode child : children) {
+            result += child.toString();
+        }
+        result += ")";
+
+        return result;
+    }
+
+    public static LinkedList<String> toString(LinkedList<SyntaxNode> trees) {
+        LinkedList<String> results = new LinkedList<String>();
+        for (SyntaxNode tree : trees) {
+            results.add(tree.toString());
+        }
+        return results;
+    }
 }
