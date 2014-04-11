@@ -12,9 +12,18 @@ import java.util.LinkedList;
  */
 public abstract class Parser {
     protected ArrayList<Rule> rules;
+    protected int grammarRevision;
 
     public Parser() {
         this.rules = new ArrayList<Rule>();
+    }
+
+    protected void updateRevision() {
+        this.grammarRevision = Grammar.getInstance().getRevision();
+    }
+
+    protected boolean behind() {
+        return (this.grammarRevision < Grammar.getInstance().getRevision());
     }
 
     public abstract LinkedList<SyntaxNode> parse(Sentence sentence);

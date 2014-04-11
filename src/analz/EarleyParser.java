@@ -149,7 +149,7 @@ public class EarleyParser extends Parser {
     }
 
     public static EarleyParser getInstance() {
-        if (EarleyParser.instance == null)
+        if (EarleyParser.instance == null || behind())
             EarleyParser.instance = new EarleyParser();
         return EarleyParser.instance;
     }

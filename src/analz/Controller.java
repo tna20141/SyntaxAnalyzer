@@ -72,6 +72,12 @@ public class Controller {
         String rawSentence = this.sentenceTextArea.getText();
         Sentence sentence;
 
+        if (!Grammar.getInstance().initialized()) {
+            MessageBox.show(this.primaryStage, "Bộ ngữ pháp chưa được khởi tạo!", "Lỗi",
+                    MessageBox.ICON_ERROR | MessageBox.OK);
+            return;
+        }
+
         try {
             sentence = new Sentence(rawSentence);
         } catch (Exception e) {
@@ -100,6 +106,28 @@ public class Controller {
         }
 
         this.resultTextArea.setText(result);
+
+        String mode = (String)this.FileModeRadio.getSelectedToggle.getUserData();
+        if (mode.equals("none"))
+            return;
+
+        String toFile = this.fileTextField.getText();
+        if (toFile.isEmpty()) {
+            MessageBox.show(this.primaryStage, "Đường dẫn file không được để trống!", "Lỗi",
+                    MessageBox.ICON_ERROR | MessageBox.OK);
+            return;
+        }
+
+        boolean append = false;
+        if (mode.equals("append"))
+            append = true;
+
+        try {
+            Outputer.write(toFile, results, true, append);
+        } catch (Exception e) {
+            MessageBox.show(this.primaryStage, "Lỗi khi ghi file:\n" + e.getMessage(), "Lỗi",
+                    MessageBox.ICON_ERROR | MessageBox.OK);
+        }
     }
 
     @FXML
@@ -108,8 +136,8 @@ public class Controller {
         String ruleFile = this.ruleTextField.getText();
 
         if (tagFile.isEmpty() || ruleFile.isEmpty()) {
-            MessageBox.show(this.primaryStage, "Đường dẫn file không được để trống!", "Cảnh báo",
-                    MessageBox.ICON_WARNING | MessageBox.OK);
+            MessageBox.show(this.primaryStage, "Đường dẫn file không được để trống!", "Lỗi",
+                    MessageBox.ICON_ERROR | MessageBox.OK);
             return;
         }
 
@@ -146,9 +174,6 @@ public class Controller {
         this.ruleTextField.setText("Resources/rules.txt");
 
         initGrammar(this.tagTextField.getText(), this.ruleTextField.getText());
-
-        CYKParser.getInstance();
-        EarleyParser.getInstance();
     }
 
     private void initGrammar(String tagFile, String ruleFile) {
