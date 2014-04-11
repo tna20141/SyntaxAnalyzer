@@ -21,6 +21,14 @@ public class Sentence {
             this.tag = tag;
             this.pos = pos;
         }
+
+        public String getWord() {
+            return this.word;
+        }
+
+        public String getTag() {
+            return this.tag;
+        }
     }
 
     private ArrayList<Word> words;
@@ -66,5 +74,15 @@ public class Sentence {
 
     public Word getWord(int pos) {
         return this.words.get(pos);
+    }
+
+    public String raw() {
+        String raw = "";
+        int i;
+        for (i = 0; i < this.words.size()-1; i++)
+            raw += this.words.get(i) + " ";
+        raw += this.words.get(i);
+
+        return raw;
     }
 }

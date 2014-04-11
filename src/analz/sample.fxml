@@ -1,8 +1,69 @@
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.layout.GridPane?>
+<?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<GridPane fx:controller="analz.Controller"
-          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
-</GridPane>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="analz.Controller">
+  <children>
+    <TabPane prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <tabs>
+        <Tab id="analyzeTab" closable="false" text="Phân tích">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <children>
+                <Pane layoutX="4.0" layoutY="3.0" prefHeight="162.0" prefWidth="593.0">
+                  <children>
+                    <TextArea fx:id="sentenceTextArea" layoutX="65.0" layoutY="21.0" prefHeight="43.0" prefWidth="494.0" wrapText="true" />
+                    <Label layoutX="28.0" layoutY="37.0" minHeight="11.132904052734375" prefHeight="11.132904052734375" text="Câu" />
+                    <TextField fx:id="fileTextField" layoutX="65.0" layoutY="79.0" prefWidth="494.0" />
+                    <Label layoutX="30.0" layoutY="82.0" text="File" />
+                    <RadioButton fx:id="fileModeRadio2" layoutX="210.0" layoutY="116.0" mnemonicParsing="false" selected="false" text="Ghi đè">
+                      <toggleGroup>
+                        <ToggleGroup fx:id="FileModeRadio" />
+                      </toggleGroup>
+                    </RadioButton>
+                    <RadioButton fx:id="fileModeRadio3" layoutX="354.0" layoutY="116.0" mnemonicParsing="false" selected="true" text="Không lưu vào file" toggleGroup="$FileModeRadio" />
+                    <RadioButton fx:id="fileModeRadio1" layoutX="80.0" layoutY="116.0" mnemonicParsing="false" text="Thêm" toggleGroup="$FileModeRadio" />
+                    <Separator layoutX="-7.0" layoutY="161.0" minHeight="1.220703125E-4" prefHeight="1.0" prefWidth="600.0" />
+                  </children>
+                </Pane>
+                <Pane prefHeight="200.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="164.0">
+                  <children>
+                    <Button fx:id="analyzeButton" cancelButton="false" layoutX="480.0" layoutY="126.0" mnemonicParsing="false" onMouseClicked="#analyzeHandler" prefHeight="36.0" prefWidth="94.0" text="Phân tích" />
+                    <TextArea fx:id="resultTextArea" editable="false" layoutX="43.0" layoutY="19.0" prefWidth="412.0" wrapText="true" />
+                    <RadioButton id="CYKButton" fx:id="CYKRadio" layoutX="480.0" layoutY="38.0" mnemonicParsing="false" selected="true" text="CYK">
+                      <toggleGroup>
+                        <ToggleGroup fx:id="AlgorithmRadio" />
+                      </toggleGroup>
+                    </RadioButton>
+                    <RadioButton id="EarleyButton" fx:id="EarleyRadio" layoutX="480.0" layoutY="74.0" mnemonicParsing="false" text="Earley" toggleGroup="$AlgorithmRadio" />
+                  </children>
+                </Pane>
+              </children>
+            </AnchorPane>
+          </content>
+        </Tab>
+        <Tab closable="false" text="Tùy chỉnh">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <children>
+                <Pane prefHeight="364.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <children>
+                    <TextField fx:id="tagTextField" layoutX="55.0" layoutY="69.0" prefWidth="431.0" />
+                    <Label layoutX="55.0" layoutY="42.0" text="File nhãn từ loại" />
+                    <Label layoutX="55.0" layoutY="109.0" text="File luật cú pháp" />
+                    <TextField id="ruleTextFiel" fx:id="ruleTextField" layoutX="55.0" layoutY="135.0" prefWidth="431.0" />
+                    <Button fx:id="updateButton" layoutX="55.0" layoutY="236.0" mnemonicParsing="false" onMouseClicked="#updateHandler" prefHeight="31.1328125" prefWidth="91.0" text="Cập nhật" />
+                  </children>
+                </Pane>
+              </children>
+            </AnchorPane>
+          </content>
+        </Tab>
+      </tabs>
+    </TabPane>
+  </children>
+</AnchorPane>

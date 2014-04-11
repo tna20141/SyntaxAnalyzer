@@ -12,10 +12,12 @@ import java.util.regex.*;
  */
 public class TagList {
     private HashMap<String, String> tags;
+    private ArrayList<String> tagList;
     private String startTag;
 
     public TagList() {
         this.tags = new HashMap<String, String>();
+        this.tagList = new ArrayList<String>();
     }
 
     public void setStartTag(String tag) {
@@ -28,6 +30,12 @@ public class TagList {
 
     public void add(String detailedTag, String tag) {
         this.tags.put(detailedTag, tag);
+        if (!tags.containsValue(tag))
+            this.tagList.add(tag);
+    }
+
+    public ArrayList<String> getList() {
+        return this.tagList;
     }
 
     public String check(String rawTag) {

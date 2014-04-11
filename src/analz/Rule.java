@@ -22,6 +22,11 @@ public class Rule {
         this.rightTags = right;
     }
 
+    public Rule(Rule rule) {
+        this.leftTags = new LinkedList<String>(rule.getLeftTags());
+        this.rightTags = new LinkedList<String>(rule.getRightTags());
+    }
+
     public void setLeftTags(LinkedList<String> left) {
         this.leftTags = left;
     }

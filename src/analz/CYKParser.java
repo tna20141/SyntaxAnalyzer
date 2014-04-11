@@ -46,6 +46,8 @@ public class CYKParser extends Parser {
         }
     }
 
+    private static CYKParser instance = null;
+
     private ArrayList<Rule> singularRules;
     private ArrayList<ArrayList<ArrayList<Rule>>> table;
     private int[] singularRulesMap;
@@ -60,8 +62,8 @@ public class CYKParser extends Parser {
         Integer argCount = 0;
         ArrayList<Rule> grammarRules = grammar.getRules();
         for (Rule rule : grammarRules) {
-            LinkedList<String> left = (LinkedList<String>)rule.getLeftTags().clone();
-            LinkedList<String> right = (LinkedList<String>)rule.getRightTags().clone();
+            LinkedList<String> left = new LinkedList<String>(rule.getLeftTags());
+            LinkedList<String> right = new LinkedList<String>(rule.getRightTags());
 
             if (right.size() == 1) {
                 this.singularRules.add(new Rule(left, right));
@@ -83,6 +85,12 @@ public class CYKParser extends Parser {
 
         this.singularRulesMap = new int[this.singularRules.size()];
         clearMap();
+    }
+
+    public static CYKParser getInstance() {
+        if (CYKParser.instance == null)
+            CYKParser.instance = new CYKParser();
+        return CYKParser.instance;
     }
 
     public LinkedList<SyntaxNode> parse(Sentence sentence) {
@@ -180,6 +188,8 @@ public class CYKParser extends Parser {
             for (SyntaxNode tree : trees)
                 res.add(tree);
         }
+
+        this.table = null;
 
         if (res.size() > 0)
             return res;
