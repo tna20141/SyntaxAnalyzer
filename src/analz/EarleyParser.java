@@ -149,7 +149,7 @@ public class EarleyParser extends Parser {
     }
 
     public static EarleyParser getInstance() {
-        if (EarleyParser.instance == null || behind())
+        if (EarleyParser.instance == null || EarleyParser.instance.behind())
             EarleyParser.instance = new EarleyParser();
         return EarleyParser.instance;
     }
@@ -172,20 +172,20 @@ public class EarleyParser extends Parser {
 
         __parse(sentence);
 
-        for (int i = 0; i < this.table.size(); i++) {
-            System.out.print(i + " || ");
-            for (int j = 0; j < this.table.get(i).size(); j++) {
-                EarleyRule rule = this.table.get(i).get(j);
-                System.out.print(rule.getStart() + " ");
-                for (String str : rule.getLeftTags())
-                    System.out.print(str + " ");
-                System.out.print(".");
-                for (String str : rule.getRightTags())
-                    System.out.print(str + " ");
-                System.out.print("| ");
-            }
-            System.out.println("");
-        }
+//        for (int i = 0; i < this.table.size(); i++) {
+//            System.out.print(i + " || ");
+//            for (int j = 0; j < this.table.get(i).size(); j++) {
+//                EarleyRule rule = this.table.get(i).get(j);
+//                System.out.print(rule.getStart() + " ");
+//                for (String str : rule.getLeftTags())
+//                    System.out.print(str + " ");
+//                System.out.print(".");
+//                for (String str : rule.getRightTags())
+//                    System.out.print(str + " ");
+//                System.out.print("| ");
+//            }
+//            System.out.println("");
+//        }
 
         while (((EarleyRule)this.rules.get(this.rules.size()-1)).isTerm())
             this.rules.remove(this.rules.size()-1);

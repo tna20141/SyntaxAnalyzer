@@ -88,7 +88,7 @@ public class CYKParser extends Parser {
     }
 
     public static CYKParser getInstance() {
-        if (CYKParser.instance == null || behind())
+        if (CYKParser.instance == null || CYKParser.instance.behind())
             CYKParser.instance = new CYKParser();
         return CYKParser.instance;
     }

@@ -13,17 +13,13 @@ import java.io.*;
 public class Grammar {
     private TagList tagList;
     private ArrayList<Rule> rules;
-    private static int revision = 0;
+    private static int revision = -1;
     private static Grammar instance = null;
 
     public static Grammar getInstance() {
         if (Grammar.instance == null)
             Grammar.instance = new Grammar();
         return Grammar.instance;
-    }
-
-    public Grammar() {
-        this.initialized = -1;
     }
 
     public void init(String tagListFile, String rulesFile) throws Exception {
@@ -36,7 +32,7 @@ public class Grammar {
         readTags(tagListFile);
         readRules(rulesFile);
 
-        if (Grammar.revision%2 == 1)
+        if (Grammar.revision%2 != 0)
             Grammar.revision++;
     }
 

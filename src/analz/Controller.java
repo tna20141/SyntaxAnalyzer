@@ -1,5 +1,6 @@
 package analz;
 
+import java.io.File;
 import java.net.URL;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
@@ -66,6 +67,8 @@ public class Controller {
 
     private Stage primaryStage;
 
+    private String path;
+
 
     @FXML
     void analyzeHandler(MouseEvent event) {
@@ -107,7 +110,7 @@ public class Controller {
 
         this.resultTextArea.setText(result);
 
-        String mode = (String)this.FileModeRadio.getSelectedToggle.getUserData();
+        String mode = (String)this.FileModeRadio.getSelectedToggle().getUserData();
         if (mode.equals("none"))
             return;
 
@@ -141,6 +144,11 @@ public class Controller {
             return;
         }
 
+        if (!(new File(tagFile).isAbsolute()))
+            tagFile = this.path + "/" + tagFile;
+        if (!(new File(ruleFile).isAbsolute()))
+            ruleFile = this.path + "/" + ruleFile;
+
         initGrammar(tagFile, ruleFile);
     }
 
@@ -170,8 +178,11 @@ public class Controller {
         this.CYKRadio.setUserData("CYK");
         this.EarleyRadio.setUserData("Earley");
 
-        this.tagTextField.setText("Resources/tags.txt");
-        this.ruleTextField.setText("Resources/rules.txt");
+        this.path = Main.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+        this.path = (new File(this.path)).getParent();
+
+        this.tagTextField.setText(this.path + "/tags.txt");
+        this.ruleTextField.setText(this.path + "/rules.txt");
 
         initGrammar(this.tagTextField.getText(), this.ruleTextField.getText());
     }
